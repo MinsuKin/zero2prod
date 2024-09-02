@@ -6,7 +6,7 @@ async fn health_check_works() {
 
     // Act
     let response = client
-        .get("https://localhost/8000/health_check")
+        .get("http://127.0.0.1:8000/health_check")
         .send()
         .await
         .expect("Failed to execute request.");
@@ -17,6 +17,6 @@ async fn health_check_works() {
 }
 
 fn spawn_app() {
-    let server = zero2prod::run().expect("Failed to bind address");
+    let server = zero2prod::run("127.0.0.1:8000").expect("Failed to bind address");
     let _ = tokio::spawn(server);
 }
